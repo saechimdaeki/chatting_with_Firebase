@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import junseong.kotlin.firebase.Model.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,17 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Log.d(Tag,"성공")
+                        val uid=FirebaseAuth.getInstance().uid ?: ""
+                        val user= User(uid,username.text.toString())
+                        val db = FirebaseFirestore.getInstance().collection("users")
+                        db.document(uid)
+                            .set(user)
+                            .addOnSuccessListener {
+                                Log.d(Tag,"데이터베이스 성공")
+                            }
+                            .addOnFailureListener {
+                                Log.d(Tag,"데이터베이스 실패")
+                            }
                         val intent=Intent(this,ChatlistActivity::class.java)
                         intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)

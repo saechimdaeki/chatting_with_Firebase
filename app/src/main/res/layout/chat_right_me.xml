@@ -10,6 +10,7 @@
        android:gravity="right"
         android:layout_marginTop="20dp"
         android:layout_marginRight="100dp"
+        android:id="@+id/right_msg"
         android:text="chat_content"/>
 
     <TextView
@@ -18,7 +19,7 @@
         android:gravity="right"
         android:textStyle="bold"
         android:layout_margin="20dp"
-        android:text="name"
+        android:text="me"
         />
 
 </RelativeLayout>

@@ -16,6 +16,10 @@ class ChatlistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlist)
+        mychatlist.setOnClickListener {
+            val intent=Intent(this,myRoomActivity::class.java)
+            startActivity(intent)
+        }
         val adapter=GroupAdapter<GroupieViewHolder>()
 
         db.collection("users")

@@ -17,5 +17,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:id="@+id/msg"
-        android:text="message"/>
+        android:text="join chat"/>
 </LinearLayout>

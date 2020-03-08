@@ -1,12 +1,12 @@
-package junseong.kotlin.firebase.Model
+package junseong.kotlin.firebase.Adapter
 
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import junseong.kotlin.firebase.R
 
-class ChatRightMe : Item<GroupieViewHolder>(){
+class ChatLeftYou : Item<GroupieViewHolder>(){
     override fun getLayout(): Int {
-        return R.layout.chat_right_me
+        return R.layout.chat_left_you
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

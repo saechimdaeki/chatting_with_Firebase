@@ -7,8 +7,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import junseong.kotlin.firebase.Model.User
-import junseong.kotlin.firebase.Model.UserItem
+import junseong.kotlin.firebase.Adapter.UserItem
 import kotlinx.android.synthetic.main.activity_chatlist.*
 
 class ChatlistActivity : AppCompatActivity() {
@@ -23,9 +22,10 @@ class ChatlistActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    adapter.add(UserItem(document.get("username").toString()))
-                    Log.d(TAG,document.get("username").toString())
-                    Log.d(TAG, "${document.id} => ${document.data}")
+                    adapter.add(UserItem(document.get("username").toString(),document.get("uid").toString()  )
+                    )
+                //    Log.d(TAG,document.get("username").toString())
+                //    Log.d(TAG, "${document.id} => ${document.data}")
                 }
                 recyclerview_list.adapter=adapter
             }
@@ -34,7 +34,13 @@ class ChatlistActivity : AppCompatActivity() {
                 Log.w(TAG, "Error getting documents.", exception)
             }
         adapter.setOnItemClickListener { item, view ->
+            Log.e(TAG, (item as UserItem).name)
+            Log.e(TAG, (item as UserItem).uid)
+            val uid =(item as UserItem).uid
+            val name = (item as UserItem).name
             val intent= Intent(this,ChatRoomActivity::class.java)
+            intent.putExtra("youruid",uid)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
     }
